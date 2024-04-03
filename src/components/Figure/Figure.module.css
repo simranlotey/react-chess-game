@@ -1,0 +1,16 @@
+.figure {
+  position: absolute;
+  width: 12.5%;
+  height: 12.5%;
+  padding: 6px;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+svg {
+  transition: all .3s;
+}
+
+svg:hover {
+  transform: scale(1.06);
+}

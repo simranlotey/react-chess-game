@@ -1,0 +1,76 @@
+.boardWrapper {
+  width: 100vw;
+  font-size: 13px;
+  min-width: 300px;
+  min-height: 300px;
+  border-radius: 8px;
+  position: relative;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  background: #F4F7FA;
+  box-shadow: 0px 35px 90px 0px #00000022;
+  color: #616165;
+}
+
+.boxes {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.boardLeft {
+  display: flex;
+  flex-flow: column-reverse;
+  position: absolute;
+  height: 100%;
+  padding-top: 20px; 
+  margin-top: -3px;
+  top: 0;
+  left: 16px;
+  z-index: 1;
+}
+
+.boardLeftItem {
+  display: flex;
+  flex-grow: 1;
+  align-items: start;
+  justify-content: center;
+}
+
+.boardBottom {
+  display: flex;
+  flex-flow: row;
+  position: absolute;
+  width: 100%;
+  margin-left: -17px;
+  padding-left: 20px;
+  bottom: 15px;
+  z-index: 1;
+  left: 0;
+}
+
+.boardBottomItem {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 700px) {
+  .boardWrapper {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 630px) {
+  .boardWrapper {
+    font-size: 7px;
+  }
+}

@@ -1,0 +1,11 @@
+.box {
+    position: relative;
+}
+
+.boxBlack {
+    background-color: #B7C0D8;
+}
+
+.boxWhite {
+    background-color: #E8EDF9;
+}
