@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./Figure.module.css";
 import { Figures } from "../../config";
 import classNames from "classnames";
@@ -158,6 +159,16 @@ const Figure = (props) => {
       </svg>
     </div>
   );
+};
+
+Figure.propTypes = {
+  figure: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.oneOf(Object.values(Figures)).isRequired,
+    color: PropTypes.oneOf(["black", "white"]).isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Figure;

@@ -34,14 +34,6 @@ export const Figures = {
   ROOK: "rook",
 };
 
-export const FigureData = {
-  id: "",
-  name: "",
-  x: 0,
-  y: 0,
-  color: "",
-};
-
 export const figures = {
   "black-rook-1-8": {
     id: "black-rook-1-8",
@@ -271,4 +263,3 @@ export const figures = {
     color: Colors.WHITE,
   },
 };
-
