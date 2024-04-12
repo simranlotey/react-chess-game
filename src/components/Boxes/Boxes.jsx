@@ -1,22 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "../Boxes/Boxes.module.css";
-import { Colors } from "../../config";
 import classNames from "classnames/bind";
+import styles from "./Boxes.module.css";
+import { BoardLetter, Colors } from "../../config";
 
-const Box = (props) => {
+function Box(props) {
+
   return (
     <li
+    onClick={() => props.cellClicked(BoardLetter[props.x], props.y)}
+    id={`cell-${props.x}-${props.y}`}
       className={classNames(styles.box, {
         [styles.boxWhite]: props.color === Colors.WHITE,
         [styles.boxBlack]: props.color === Colors.BLACK,
+        [styles.availableCell]:
+          props.isAvailableForMove && !props.isHavingFigure,
+        [styles.cellSelected]: props.isSelected,
       })}
-    ></li>
+    >
+      <div
+        className={classNames(styles.cellCircle, {
+          [styles.cellCircleShow]:
+            props.isAvailableForMove && !props.isHavingFigure,
+        })}
+      ></div>
+    </li>
   );
-};
+}
 
 Box.propTypes = {
-  color: PropTypes.oneOf([Colors.WHITE, Colors.BLACK]).isRequired,
+  color: PropTypes.oneOf([Colors.WHITE, Colors.BLACK]),
+  isSelected: PropTypes.bool,
+  cellClicked: PropTypes.func,
+  x: PropTypes.any,
+  y: PropTypes.number,
+  isAvailableForMove: PropTypes.bool,
+  isHavingFigure: PropTypes.bool,
 };
 
 export default Box;

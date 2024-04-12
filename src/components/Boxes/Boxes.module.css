@@ -1,5 +1,6 @@
 .box {
     position: relative;
+    transform: 0.3s;
 }
 
 .boxBlack {
@@ -8,4 +9,32 @@
 
 .boxWhite {
     background-color: #E8EDF9;
+}
+
+.cellSelected {
+    background-color: #B1A7FC;
+}
+
+.availableCell:hover {
+    cursor: pointer;
+}
+
+.cellCircle {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 500px;
+    left: calc(50% - 12px);
+    top: calc(50% - 12px);
+    opacity: 0;
+    background-color: #7B61FF;
+    transition: all .2s;
+}
+
+/* .cellCircle:hover {
+    opacity: .8;
+} */
+
+.cellCircleShow {
+    opacity: 1;
 }

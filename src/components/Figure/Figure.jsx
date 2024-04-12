@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import styles from "./Figure.module.css";
 import { Figures } from "../../config";
-import classNames from "classnames";
 
-const Figure = (props) => {
+function Figure(props) {
   const figureColors = {
     dark: "#34364C",
     light: "#F4F7FA",
   };
 
   const position = {
-    left: (props.figure.x - 1) * 12.5 + "%",
-    bottom: (props.figure.y - 1) * 12.5 + "%",
+    left: `${(props.figure.x - 1) * 12.5}%`,
+    bottom: `${(props.figure.y - 1) * 12.5}%`,
   };
 
   const isBlack = props.figure.color === "black";
@@ -144,7 +144,10 @@ const Figure = (props) => {
 
   return (
     <div
-      className={classNames(styles.figure)}
+      onClick={() => props.figureClicked(props.figure)}
+      className={classNames(styles.figure, {
+        [styles.figureEatable]: props.isEatable,
+      })}
       style={{ left: position.left, bottom: position.bottom }}
       id={props.figure.id}
     >
@@ -159,7 +162,7 @@ const Figure = (props) => {
       </svg>
     </div>
   );
-};
+}
 
 Figure.propTypes = {
   figure: PropTypes.shape({
@@ -169,6 +172,8 @@ Figure.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
   }).isRequired,
+  isEatable: PropTypes.bool,
+  figureClicked: PropTypes.func.isRequired,
 };
 
 export default Figure;

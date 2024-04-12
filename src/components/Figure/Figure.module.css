@@ -14,3 +14,7 @@ svg {
 svg:hover {
   transform: scale(1.06);
 }
+
+.figureEatable {
+  background-color: #ff000033;
+}

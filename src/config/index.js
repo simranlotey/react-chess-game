@@ -34,7 +34,7 @@ export const Figures = {
   ROOK: "rook",
 };
 
-export const figures = {
+export const figuress = {
   "black-rook-1-8": {
     id: "black-rook-1-8",
     name: Figures.ROOK,
