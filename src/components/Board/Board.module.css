@@ -42,7 +42,8 @@
   flex-grow: 1;
   align-items: start;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .boardBottom {
@@ -62,7 +63,16 @@
   flex-grow: 1;
   align-items: center;
   justify-content: flex-end;
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.colorWhite {
+  color: #E8EDF9;
+}
+
+.colorBlack {
+  color: #B7C0D8;
 }
 
 @media (max-width: 700px) {

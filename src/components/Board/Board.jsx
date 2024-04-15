@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import styles from "./Board.module.css";
 import { BoardNumber, Colors, Figures } from "../../config";
 import Boxes from "../Boxes/Boxes";
@@ -50,41 +51,27 @@ function Board() {
   };
 
   const initCells = () => {
-    const cells = [];
+    const boxes = [];
     for (let y = 8; y >= 1; y--) {
       for (let x = 1; x <= 8; x++) {
+        const uniqueKey = uuidv4();
         cellsFigure[`${x}-${y}`] = null;
         const boardLetter = BoardNumber[x];
-        if ((y + x) % 2 === 0) {
-          cells.push(
-            <Boxes
-              color={Colors.BLACK}
-              x={boardLetter}
-              y={y}
-              key={`${boardLetter}-${y}`}
-              isAvailableForMove={isAvailableCellForMove(x, y)}
-              isHavingFigure={isCellHavingFigure(x, y)}
-              cellClicked={cellClicked}
-              isSelected={isSelectedCell(x, y)}
-            />
-          );
-        } else {
-          cells.push(
-            <Boxes
-              color={Colors.WHITE}
-              x={boardLetter}
-              y={y}
-              key={`${boardLetter}-${y}`}
-              isAvailableForMove={isAvailableCellForMove(x, y)}
-              isHavingFigure={isCellHavingFigure(x, y)}
-              cellClicked={cellClicked}
-              isSelected={isSelectedCell(x, y)}
-            />
-          );
-        }
+        boxes.push(
+          <Boxes
+            color={(y + x) % 2 === 0 ? Colors.BLACK : Colors.WHITE}
+            key={uniqueKey}
+            x={boardLetter}
+            y={y}
+            isAvailableForMove={isAvailableCellForMove(x, y)}
+            isHavingFigure={isCellHavingFigure(x, y)}
+            cellClicked={cellClicked}
+            isSelected={isSelectedCell(x, y)}
+          />
+        );
       }
     }
-    return cells;
+    return boxes;
   };
 
   const isEatableFigure = (figure) => {
@@ -137,7 +124,6 @@ function Board() {
       setChoseFigurePos(null);
       return;
     }
-
 
     setChoseFigurePos({
       figure,
@@ -436,7 +422,6 @@ function Board() {
     return obj;
   };
 
-
   const getOtherColor = (color) => {
     return color === Colors.BLACK ? Colors.WHITE : Colors.BLACK;
   };
@@ -449,16 +434,26 @@ function Board() {
   return (
     <div className={styles.boardWrapper} ref={boardRef}>
       <ul className={styles.boardLeft}>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((number) => (
-          <li key={number} className={styles.boardLeftItem}>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((number, index) => (
+          <li
+            key={number}
+            className={`${styles.boardLeftItem} ${
+              index % 2 === 0 ? styles.colorWhite : styles.colorBlack
+            }`}
+          >
             {number}
           </li>
         ))}
       </ul>
 
       <ul className={styles.boardBottom}>
-        {["A", "B", "C", "D", "E", "F", "G", "H"].map((letter) => (
-          <li key={letter} className={styles.boardBottomItem}>
+        {["A", "B", "C", "D", "E", "F", "G", "H"].map((letter, index) => (
+          <li
+            key={letter}
+            className={`${styles.boardBottomItem} ${
+              index % 2 === 0 ? styles.colorWhite : styles.colorBlack
+            }`}
+          >
             {letter}
           </li>
         ))}
