@@ -4,17 +4,23 @@ import styles from "./Board.module.css";
 import { BoardNumber, Colors, Figures } from "../../config";
 import Boxes from "../Boxes/Boxes";
 import Figure from "../Figure/Figure";
+import ConfettiExplosion from "react-confetti-explosion";
 import {
   changeFigurePosition,
   removeFigure,
   selectFigures,
   setGameStarted,
+  selectGameWon,
+  setGameWon,
+  resetGame,
 } from "../../store/game/game";
+import chessLogo from "../../assets/chesslogo.png";
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 
 function Board() {
   const dispatch = useAppDispatch();
   const figures = useAppSelector(selectFigures);
+  const gameWon = useAppSelector(selectGameWon);
   let dangerousCells = useRef({ white: {}, black: {} });
   const boardRef = useRef(null);
   const [choseFigurePos, setChoseFigurePos] = useState(null);
@@ -152,7 +158,8 @@ function Board() {
     }
   };
 
-  const endGame = () => {
+  const endGame = (winner) => {
+    dispatch(setGameWon(winner));
     dispatch(setGameStarted(false));
   };
 
@@ -425,7 +432,44 @@ function Board() {
   const getOtherColor = (color) => {
     return color === Colors.BLACK ? Colors.WHITE : Colors.BLACK;
   };
+  const newGameStart = () => {
+    dispatch(resetGame());
+    dispatch(setGameStarted(true));
+  };
+  const getGameWonJSX = () => {
+    if (!gameWon) return null;
+    const color = gameWon[0].toUpperCase() + gameWon.slice(1);
 
+    return (
+      <>
+        <div className={styles.gameWon}>
+          <img className={styles.chessLogo} src={chessLogo} />
+          <h1>{color} won</h1>
+          <button onClick={newGameStart} className={styles.newGameButton}>
+            New Game
+          </button>
+          <ConfettiExplosion
+            blast={true}
+            duration={10000}
+            recycle={false}
+            force={1.2}
+            width={2000}
+            gravity={0.3}
+            floorHeight={0}
+            explosionHeight={5}
+            colors={[
+              "#ff0000",
+              "#00ff00",
+              "#0000ff",
+              "#ffff00",
+              "#ffa500",
+              "#ffc0cb",
+            ]}
+          />
+        </div>
+      </>
+    );
+  };
   useEffect(() => {
     resizeBoard();
     window.addEventListener("resize", resizeBoard);
@@ -463,6 +507,7 @@ function Board() {
         {initCells()}
         {initFigures()}
       </ul>
+      {getGameWonJSX()}
     </div>
   );
 }

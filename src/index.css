@@ -17,16 +17,12 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 35px;
-  background:
-    linear-gradient(rgb(53, 153, 14),
-      transparent),
-    linear-gradient(90deg,
-      rgb(3, 91, 126),
-      transparent),
-    linear-gradient(-90deg,
-      rgb(70, 96, 170),
-      transparent);
-  background-blend-mode: screen;
+  background-image: url(../src/assets/backgroundimage.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 ul,

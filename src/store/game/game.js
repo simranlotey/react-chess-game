@@ -1,9 +1,9 @@
-import { Colors, figuress } from "../../config/index";
+import { figuress } from "../../config/index";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  color: Colors.WHITE,
   figures: figuress,
+  gameWon: null,
   isGameStarted: false,
 };
 
@@ -18,15 +18,29 @@ export const game = createSlice({
     removeFigure: (state, action) => {
       delete state.figures[action.payload.id];
     },
+    setGameWon: (state, action) => {
+      state.gameWon = action.payload;
+    },
+    resetGame: (state) => {
+      state.gameWon = initialState.gameWon;
+      state.figures = initialState.figures;
+      state.isGameStarted = false;
+    },
     setGameStarted: (state, action) => {
       state.isGameStarted = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const { setColor, changeFigurePosition, removeFigure, setGameWon, resetGame, setGameStarted } = game.actions;
+export const {
+  changeFigurePosition,
+  removeFigure,
+  setGameWon,
+  resetGame,
+  setGameStarted,
+} = game.actions;
 
 export const selectFigures = (state) => state.game.figures;
-export const selectIsGameStarted = (state) => state.game.isGameStarted;
+export const selectGameWon = (state) => state.game.gameWon;
 
 export default game.reducer;
