@@ -1,7 +1,8 @@
-import { figuress } from "../../config/index";
+import { figuress, Colors } from "../../config/index";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  color: Colors.WHITE,
   figures: figuress,
   gameWon: null,
   isGameStarted: false,
@@ -42,5 +43,6 @@ export const {
 
 export const selectFigures = (state) => state.game.figures;
 export const selectGameWon = (state) => state.game.gameWon;
+export const selectColor = (state) => state.game.color;
 
 export default game.reducer;
