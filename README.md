@@ -28,7 +28,7 @@ Welcome to the **Chess Game** built using React.js! This is a fully functional, 
 
 2. Navigate into the project directory:
    ```
-   cd chess-game
+   cd react-chess-game
    ```
 
 3. Install the dependencies:
